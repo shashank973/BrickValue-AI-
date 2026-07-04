@@ -253,8 +253,18 @@ def load_ml_pipeline():
         metadata = joblib.load(os.path.join('models', 'model_metadata.joblib'))
         return model, scaler, metadata
     except Exception as e:
-        st.error(f"Error loading model: {e}. Make sure you have executed 'train.py' first.")
-        return None, None, None
+        try:
+            # If load fails (e.g. due to scikit-learn version mismatch on remote server vs local)
+            # execute train.py dynamically in this environment to generate matching joblibs.
+            with open('train.py', 'r') as f:
+                exec(f.read(), globals())
+            model = joblib.load(os.path.join('models', 'house_price_model.joblib'))
+            scaler = joblib.load(os.path.join('models', 'scaler.joblib'))
+            metadata = joblib.load(os.path.join('models', 'model_metadata.joblib'))
+            return model, scaler, metadata
+        except Exception as retrain_err:
+            st.error(f"Error loading model: {e}. Attempted auto-training but failed: {retrain_err}")
+            return None, None, None
 
 df = load_housing_data()
 model, scaler, metadata = load_ml_pipeline()
