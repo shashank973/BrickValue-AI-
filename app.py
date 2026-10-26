@@ -689,7 +689,7 @@ if df is not None and model is not None:
                 total_interest = 0.0
                 total_payable = down_payment
                 
-            st.markdown(f"""
+            st.html(f"""
             <div style="background:rgba(30,41,59,0.3); padding:1.5rem; border-radius:18px; border:1px solid rgba(255,255,255,0.06); margin-top:1rem;">
                 <table style="width:100%; border-collapse:collapse; color:#f1f5f9; font-size:0.95rem;">
                     <tr>
@@ -718,7 +718,7 @@ if df is not None and model is not None:
                     </tr>
                 </table>
             </div>
-            """, unsafe_allow_html=True)
+            """)
             
         with fin_col2:
             st.markdown('<h3 style="color:#f8fafc; margin-bottom:1rem;">Affordability Meter</h3>', unsafe_allow_html=True)
@@ -750,7 +750,7 @@ if df is not None and model is not None:
                     color = "#ef4444"  # Red
                     desc = "Risky investment! The monthly EMI exceeds 50% of your take-home pay. Standard lenders may reject this. We recommend increasing your down payment or choosing a lower-priced home."
                     
-            st.markdown(f"""
+            st.html(f"""
             <div style="background:rgba(30,41,59,0.3); padding:1.5rem; border-radius:18px; border:1px solid rgba(255,255,255,0.06); text-align:center; min-height:330px; display:flex; flex-direction:column; justify-content:center;">
                 <p style="margin:0; font-size:0.8rem; text-transform:uppercase; letter-spacing:0.1em; color:#94a3b8;">Valuation Income Ratio</p>
                 <h3 style="color:{color}; font-size:1.9rem; font-weight:700; margin:0.5rem 0;">{affordability}</h3>
@@ -766,7 +766,7 @@ if df is not None and model is not None:
                     {desc}
                 </p>
             </div>
-            """, unsafe_allow_html=True)
+            """)
             
         # DYNAMIC AI-BASED SUGGESTIONS & INSIGHTS (RULE-BASED)
         st.markdown('<h2 class="section-title">💡 AI-Based Valuation Suggestions</h2>', unsafe_allow_html=True)
